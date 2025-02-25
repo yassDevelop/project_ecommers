@@ -3,7 +3,6 @@ package com.alten.sahim.back.dto;
 import com.alten.sahim.back.entity.InventoryStatus;
 import com.alten.sahim.back.entity.Product;
 import lombok.*;
-
 import java.time.Instant;
 
 @Getter

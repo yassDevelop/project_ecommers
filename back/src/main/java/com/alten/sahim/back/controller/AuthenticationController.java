@@ -1,21 +1,9 @@
 package com.alten.sahim.back.controller;
 
 import com.alten.sahim.back.dto.*;
-import com.alten.sahim.back.security.*;
-import com.alten.sahim.back.entity.User;
-import com.alten.sahim.back.security.JwtUtil;
 import com.alten.sahim.back.service.AuthService;
-import com.alten.sahim.back.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.util.Map;
 
 @RestController

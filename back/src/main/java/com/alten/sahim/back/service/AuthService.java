@@ -3,19 +3,12 @@ package com.alten.sahim.back.service;
 import com.alten.sahim.back.dao.UserDao;
 import com.alten.sahim.back.dto.UserDto;
 import com.alten.sahim.back.entity.User;
-import com.alten.sahim.back.security.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 

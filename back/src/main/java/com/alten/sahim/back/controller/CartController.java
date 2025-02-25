@@ -3,7 +3,6 @@ package com.alten.sahim.back.controller;
 import com.alten.sahim.back.dto.CartDto;
 import com.alten.sahim.back.dto.ProductDto;
 import com.alten.sahim.back.dto.UserDto;
-import com.alten.sahim.back.entity.Cart;
 import com.alten.sahim.back.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

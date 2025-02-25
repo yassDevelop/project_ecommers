@@ -1,6 +1,5 @@
 package com.alten.sahim.back.dto;
 
-import com.alten.sahim.back.entity.Product;
 import com.alten.sahim.back.entity.User;
 import lombok.*;
 

@@ -1,9 +1,7 @@
 package com.alten.sahim.back.dto;
 
 import com.alten.sahim.back.entity.Cart;
-import com.alten.sahim.back.entity.User;
 import lombok.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

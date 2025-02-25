@@ -1,8 +1,6 @@
 package com.alten.sahim.back.service;
 
 import com.alten.sahim.back.entity.User;
-import com.alten.sahim.back.dao.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

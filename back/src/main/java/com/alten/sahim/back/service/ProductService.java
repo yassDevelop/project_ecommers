@@ -1,9 +1,6 @@
 package com.alten.sahim.back.service;
 
 import com.alten.sahim.back.dto.ProductDto;
-import com.alten.sahim.back.entity.Product;
-import com.alten.sahim.back.dao.ProductDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

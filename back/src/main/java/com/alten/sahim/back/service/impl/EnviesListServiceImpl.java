@@ -1,16 +1,10 @@
 package com.alten.sahim.back.service.impl;
 
-import com.alten.sahim.back.dao.CartDao;
 import com.alten.sahim.back.dao.EnviesListDao;
-import com.alten.sahim.back.dto.CartDto;
 import com.alten.sahim.back.dto.EnviesListDto;
 import com.alten.sahim.back.dto.ProductDto;
 import com.alten.sahim.back.dto.UserDto;
-import com.alten.sahim.back.entity.Cart;
 import com.alten.sahim.back.entity.EnviesList;
-import com.alten.sahim.back.entity.Product;
-import com.alten.sahim.back.entity.User;
-import com.alten.sahim.back.service.CartService;
 import com.alten.sahim.back.service.EnviesListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
