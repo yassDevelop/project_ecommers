@@ -2,6 +2,7 @@ package com.alten.sahim.back.dto;
 
 import com.alten.sahim.back.entity.InventoryStatus;
 import com.alten.sahim.back.entity.Product;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import java.time.Instant;
 
@@ -10,17 +11,31 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Schema(description = "Détail pour un produit")
 public class ProductDto {
+    @Schema(description = "ID du produit", example = "1")
     private Long id;
+
+    @Schema(description = "Code du produit", example = "P001")
     private String code;
+
+    @Schema(description = "Nom du produit", example = "Produit 1")
     private String name;
+
+    @Schema(description = "Description du produit", example = "Produit 1")
     private String description;
     private String image;
     private String category;
+
+    @Schema(description = "Prix du produit", example = "150.0")
     private Double price;
+
+    @Schema(description = "Quantité en stock", example = "17")
     private Integer quantity;
     private String internalReference;
     private Long shellId;
+
+    @Schema(description = "Statut du stock", example = "INSTOCK")
     private InventoryStatus inventoryStatus;
     private Integer rating;
     private Instant createdAt;
