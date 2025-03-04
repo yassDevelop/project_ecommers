@@ -1,4 +1,8 @@
-:host {
+// :host {
+//     height: 100%;
+//     overflow: auto;
+// }
+.app-content {
+    overflow: display;
     height: 100%;
-    overflow: auto;
 }
