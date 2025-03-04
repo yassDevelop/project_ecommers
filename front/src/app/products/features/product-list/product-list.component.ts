@@ -3,9 +3,14 @@ import { Product } from "app/products/data-access/product.model";
 import { ProductsService } from "app/products/data-access/products.service";
 import { ProductFormComponent } from "app/products/ui/product-form/product-form.component";
 import { ButtonModule } from "primeng/button";
+import { CommonModule } from '@angular/common';
 import { CardModule } from "primeng/card";
 import { DataViewModule } from 'primeng/dataview';
 import { DialogModule } from 'primeng/dialog';
+import { CartService } from "app/carts/data-access/cart.service";
+import { MessageService } from "primeng/api";
+import { UserService } from "app/users/data-access/users.service";
+import { AuthService } from "app/users/data-access/auth.service";
 
 const emptyProduct: Product = {
   id: 0,
@@ -29,24 +34,24 @@ const emptyProduct: Product = {
   templateUrl: "./product-list.component.html",
   styleUrls: ["./product-list.component.scss"],
   standalone: true,
-  imports: [DataViewModule, CardModule, ButtonModule, DialogModule, ProductFormComponent],
+  imports: [DataViewModule, CardModule, ButtonModule, DialogModule, ProductFormComponent, CommonModule],
 })
 export class ProductListComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
+  private cartService = inject(CartService);
+  private messageService = inject(MessageService);
+  private authService = inject(AuthService);
 
   public readonly products = this.productsService.products;
 
   public isDialogVisible = false;
   public isCreation = false;
+  public isAdmin = false;
   public readonly editedProduct = signal<Product>(emptyProduct);
 
-  //public products: Product[] = [];
-
   ngOnInit() {
-    this.productsService.get().subscribe();
-    //this.productService.get().subscribe((data) => {
-         // this.products = data;
-    //});
+    this.productsService.getAllProducts().subscribe();
+     this.isAdmin= this.authService.checkEmail();
   }
 
   public onCreate() {
@@ -62,7 +67,11 @@ export class ProductListComponent implements OnInit {
   }
 
   public onDelete(product: Product) {
-    this.productsService.delete(product.id).subscribe();
+    if (product.id && product.id > 0) {  
+      this.productsService.delete(product.id).subscribe();
+  } else {
+      console.warn("La suppression est invalide :", product.id);
+  }
   }
 
   public onSave(product: Product) {
@@ -80,5 +89,15 @@ export class ProductListComponent implements OnInit {
 
   private closeDialog() {
     this.isDialogVisible = false;
+  }
+
+  public addCart(product: Product) {
+    this.cartService.addToCart(product);
+    this.messageService.add({
+      summary: "a été ajouté au panier !",
+      detail: "Produit a été ajouté au panier avec succès",
+      icon: "pi pi-shopping-cart",
+      severity: "success"
+  });
   }
 }

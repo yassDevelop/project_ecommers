@@ -1,26 +1,46 @@
 <h1 class="text-center">Liste des produits</h1>
 
-<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center"/>
+<p-button label="Créer produit" (onClick)="onCreate()" [disabled]="isAdmin" class="block text-center mb-3"/>
 
 <p-dataView #dv [value]="products()">
     <ng-template pTemplate="list" let-products>
-        @for (product of products; track product) {
-      <!--<img [src]="product.image" [alt]="product.name" />
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <p>Prix : {{ product.price | currency }}</p>
-      <button (click)="addToCart(product)">Ajouter au panier</button>-->
-      <button (click)="addToCart(product)">Ajouter au panier</button>
+        @for (product of products; track product.id) {
             <p-card class="block mb-2">
-                <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
-                <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
-
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
-                        <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)" />
+                <ng-template pTemplate="header">
+                    <div class="flex flex-wrap gap-3">
+                        <p-button label="Add to Cart" severity="primary" icon="pi pi-shopping-cart" (onClick)="addCart(product)" outlined="true" />
+                        <p-button label="Modifier" severity="secondary" [disabled]="isAdmin" (onClick)="onUpdate(product)" outlined="true" />
+                        <p-button label="Supprimer" severity="danger" [disabled]="isAdmin" (onClick)="onDelete(product)" outlined="true" />
                     </div>
                 </ng-template>
+                <div class="flex gap-3">
+                    <div class="flex flex-column gap-2">
+                        <div class="text-900 font-medium text-xl">{{ product.name }} : {{ product.price }} €</div>
+                        <div class="flex flex-grow-1 gap-2">
+                            <i class="pi pi-tag text-500"></i>
+                            <span class="text-600">Catégorie : {{ product.category }}</span>
+                        </div>
+                        <div class="flex gap-1">
+                            <i class="pi pi-star-fill text-yellow-500"></i>
+                            <span class="text-600 text-yellow-900">Note moyenne : {{ product.rating }} / 10</span>
+                        </div>
+                
+                        <div class="flex gap-2">
+                            <div [ngSwitch]="product.inventoryStatus">
+                                <span *ngSwitchCase="'INSTOCK'"
+                                    class="bg-green-100 text-green-700 border-round inline-flex py-1 px-2 text-sm">En
+                                    stock</span>
+                                <span *ngSwitchCase="'LOWSTOCK'"
+                                    class="bg-orange-100 text-orange-700 border-round inline-flex py-1 px-2 text-sm">Stocks
+                                    bientôt épuisés</span>
+                                <span *ngSwitchCase="'OUTOFSTOCK'"
+                                    class="bg-pink-100 text-pink-700 border-round inline-flex py-1 px-2 text-sm">Stocks
+                                    épuisés</span>
+                                <span *ngSwitchDefault></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </p-card>
         }
     </ng-template>

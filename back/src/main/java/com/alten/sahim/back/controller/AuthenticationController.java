@@ -27,11 +27,10 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "200", description = "Utilisateur enregistré avec succès"),
             @ApiResponse(responseCode = "400", description = "Requête invalide")
     })
-    public ResponseEntity<String> register(
+    public ResponseEntity<UserDto> register(
             @Parameter(description = "Détail de l'utilisateur à sauvegarder", required = true)
             @RequestBody UserDto userDto) {
-            authService.registerUser(userDto);
-            return ResponseEntity.ok("Utilisateur enregistré avec succès !");
+            return ResponseEntity.ok().body(authService.registerUser(userDto));
     }
 
     @PostMapping("/login")
@@ -40,10 +39,10 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "200", description = "Connexion réussie, token JWT retourné"),
             @ApiResponse(responseCode = "401", description = "Email ou mot de passe incorrect")
     })
-    public ResponseEntity<Map<String, String>> login(
+    public ResponseEntity<ResponseDto> login(
             @Parameter(description = "Informations de l'authentification (email et mot de passe)", required = true)
-            @RequestBody Map<String, String> credentials) {
-        String token = authService.authenticate(credentials.get("email"), credentials.get("password"));
-        return ResponseEntity.ok(Map.of("token", token));
+            @RequestBody RequestDto request) {
+        String token = authService.authenticate(request.getEmail(), request.getPassword());
+        return ResponseEntity.ok(ResponseDto.toDto(token));
     }
 }

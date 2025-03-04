@@ -70,11 +70,12 @@ public class ProductDto {
         product.setCategory(productDto.getCategory());
         product.setPrice(productDto.getPrice());
         product.setQuantity(productDto.getQuantity());
-        product.setShellId(product.getShellId());
+        product.setInternalReference(productDto.getInternalReference());
+        product.setShellId(productDto.getShellId());
         product.setInventoryStatus(productDto.getInventoryStatus());
         product.setRating(productDto.getRating());
         product.setCreatedAt(productDto.getCreatedAt());
-        product.setUpdatedAt(product.getUpdatedAt());
+        product.setUpdatedAt(productDto.getUpdatedAt());
         return product;
     }
 }

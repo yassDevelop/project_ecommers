@@ -1,0 +1,53 @@
+<div class="surface-section px-4 py-6 md:px-6 lg:px-8">
+    <div class="border-left-2 border-blue-500 mb-4">
+        <span class="bg-white text-blue-500 font-bold text-2xl inline-block px-3">
+            <i class="pi pi-user-plus text-2xl"></i>
+            <span class="font-bold ml-3 text-4xl text-900">Inscription</span>
+        </span>
+    </div>
+
+    <div class="flex flex-column gap-2 p-dropdown-panel p-6 surface-50">
+        <form [formGroup]="registerForm" class="flex flex-column gap-4">
+
+            <div class="flex flex-column gap-1">
+                <input formControlName="username" type="text" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 p-input-filled p-calendar-w-btn p-inputtext" 
+                       placeholder="Username" name="username">
+                <span *ngIf="registerForm.hasError('required','username') && registerForm.get('username')?.dirty" 
+                      class="text-red-500 text-sm">* Username est vide</span>
+            </div>
+
+            <div class="flex flex-column gap-1">
+                <input formControlName="firstname" type="text" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 p-input-filled p-calendar-w-btn p-inputtext" 
+                       placeholder="Firstname" name="firstname">
+                <span *ngIf="registerForm.hasError('required','firstname') && registerForm.get('firstname')?.dirty" 
+                      class="text-red-500 text-sm">* Firstname est vide</span>
+            </div>
+
+            <div class="flex flex-column gap-1">
+                <input formControlName="email" type="email" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 p-input-filled p-calendar-w-btn p-inputtext" 
+                       placeholder="Email" name="email">
+                <span *ngIf="registerForm.hasError('required','email') && registerForm.get('email')?.dirty" 
+                      class="text-red-500 text-sm">* Email est vide</span>
+                <span *ngIf="registerForm.hasError('email','email') && registerForm.get('email')?.dirty" 
+                      class="text-red-500 text-sm">* Email est invalid</span>    
+            </div>
+
+            <div class="flex flex-column gap-1">
+                <input formControlName="password" type="password" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 p-input-filled p-calendar-w-btn p-inputtext" 
+                       placeholder="Mot de passe" name="password">
+                <span *ngIf="registerForm.hasError('required','password') && registerForm.get('password')?.dirty" 
+                      class="text-red-500 text-sm">* Mot de passe est vide</span>
+            </div>
+
+            <div class="flex justify-content-between mt-4">
+                <button [disabled]="registerForm.invalid" [class.disabled]="registerForm.invalid" 
+                        type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 p-button" 
+                        (click)="inscrire()">S'inscrire</button>
+            </div>
+        </form>
+        <div *ngIf="isError" class="mb-4 red-500">
+            <span class="surface-50 color-black-text">{{messageError}}</span>
+            <span class="ml-3 cursor-pointer lenk-login-color" (click)="navByLogin()">Veuillez se connecter</span>
+        </div>
+    </div>
+</div>

@@ -25,12 +25,13 @@ public class AuthService {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public void registerUser(UserDto userDto) {
+    public UserDto registerUser(UserDto userDto) {
         if (userDao.findByEmail(userDto.getEmail()).isPresent()) {
                 throw new IllegalArgumentException("L'email est déjà utilisé !");
         }
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        userDao.save(UserDto.toEntity(userDto));
+        User userSaved = userDao.save(UserDto.toEntity(userDto));
+        return UserDto.toDTO(userSaved);
     }
 
     public String authenticate(String email, String password) {

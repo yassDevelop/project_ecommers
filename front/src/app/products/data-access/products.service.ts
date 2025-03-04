@@ -8,13 +8,13 @@ import { catchError, Observable, of, tap } from "rxjs";
 }) export class ProductsService {
 
     private readonly http = inject(HttpClient);
-    private readonly path = "/api/products";
+    private readonly path = "http://localhost:8096/products";
 
     private readonly _products = signal<Product[]>([]);
 
     public readonly products = this._products.asReadonly();
-
-    public get(): Observable<Product[]> {
+    
+    public getAllProducts(): Observable<Product[]> {
         return this.http.get<Product[]>(this.path).pipe(
             catchError((error) => {
                 return this.http.get<Product[]>("assets/products.json");
@@ -23,23 +23,21 @@ import { catchError, Observable, of, tap } from "rxjs";
         );
     }
 
-    //getProducts(): Observable<Product[]> {
-        //return this.http.get<Product[]>(this.apiUrl);
-    //}
-
-    public create(product: Product): Observable<boolean> {
-        return this.http.post<boolean>(this.path, product).pipe(
+    public create(product: Product): Observable<Product> {
+        const { id, ...productWithoutId } = product;
+        return this.http.post<Product>(this.path, productWithoutId).pipe(
             catchError(() => {
-                return of(true);
+                return of(product);
             }),
             tap(() => this._products.update(products => [product, ...products])),
         );
     }
 
-    public update(product: Product): Observable<boolean> {
-        return this.http.patch<boolean>(`${this.path}/${product.id}`, product).pipe(
+    public update(product: Product): Observable<Product> {
+        debugger;
+        return this.http.patch<Product>(`${this.path}/${product.id}`, product).pipe(
             catchError(() => {
-                return of(true);
+                return of(product);
             }),
             tap(() => this._products.update(products => {
                 return products.map(p => p.id === product.id ? product : p)
