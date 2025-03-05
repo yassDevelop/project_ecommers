@@ -10,7 +10,7 @@
         <span class="text-xl text-900 font-bold text-3xl">Total</span>
         <span class="text-xl text-900 font-bold text-3xl">{{ cartTotalPrice() }} €</span>
     </li>
-    <ul class="list-none p-2 m-1" style="flex: 1; overflow-y: auto; min-height: 300px;">
+    <ul class="list-none p-2 m-1" style="flex: 2; overflow-y: auto; min-height: 300px;">
         @for (product of cart(); track $index) {
         <li class="flex flex-column gap-6 md:flex-row py-6 border-bottom-2 border-200 md:align-items-start">
             <div class="flex-auto">

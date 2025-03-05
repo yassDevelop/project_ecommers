@@ -9,7 +9,6 @@ import { DataViewModule } from 'primeng/dataview';
 import { DialogModule } from 'primeng/dialog';
 import { CartService } from "app/carts/data-access/cart.service";
 import { MessageService } from "primeng/api";
-import { UserService } from "app/users/data-access/users.service";
 import { AuthService } from "app/users/data-access/auth.service";
 
 const emptyProduct: Product = {
